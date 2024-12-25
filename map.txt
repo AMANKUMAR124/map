@@ -1,0 +1,165 @@
+1. What is a Map in Java?
+A Map in Java is an object that maps keys to values, meaning that each key is associated with exactly one value. It is part of the Java Collections Framework and does not extend the Collection interface. It allows you to store key-value pairs, where each key is unique and maps to a specific value. A map is useful when you need to store and retrieve data based on a unique key.
+
+Common operations: put(), get(), remove(), containsKey(), containsValue(), keySet(), values(), etc.
+Common Map types in Java include:
+
+HashMap
+TreeMap
+LinkedHashMap
+2. What are the commonly used implementations of Map in Java?
+The commonly used implementations of the Map interface in Java are:
+
+HashMap: It is the most widely used implementation of Map. It allows null values and null keys. It does not maintain the order of keys.
+
+TreeMap: Implements Map and stores key-value pairs in sorted order based on the natural ordering of keys or using a specified Comparator. Does not allow null keys but allows null values.
+
+LinkedHashMap: A variation of HashMap that maintains the insertion order. The order in which entries are added is preserved.
+
+Hashtable: An older implementation of Map that synchronizes its methods, making it thread-safe but less efficient in single-threaded environments.
+
+3. What is the difference between HashMap and TreeMap?
+Feature	HashMap	TreeMap
+Ordering	Does not maintain any order of keys	Maintains keys in sorted order (based on their natural ordering or a custom comparator)
+Null Keys/Values	Allows one null key and any number of null values	Does not allow null keys (but allows null values)
+Performance	Faster than TreeMap for most operations (O(1) for get and put)	Slower than HashMap (O(log n) for get and put) due to the sorting
+Use Case	Ideal for unordered key-value pairs	Ideal when sorted keys are required
+Implementation	Uses hashing technique	Uses a Red-Black tree (self-balancing binary search tree)
+4. How do you check if a key exists in a Map in Java?
+To check if a key exists in a Map, you can use the containsKey() method. This method returns true if the map contains the specified key, otherwise it returns false.
+
+Example:
+
+java
+Copy code
+Map<String, Integer> map = new HashMap<>();
+map.put("apple", 10);
+map.put("banana", 20);
+
+// Check if "apple" is a key in the map
+if (map.containsKey("apple")) {
+    System.out.println("Key 'apple' exists in the map");
+} else {
+    System.out.println("Key 'apple' does not exist in the map");
+}
+5. What are Generics in Java?
+Generics in Java are a feature that allows you to define classes, interfaces, and methods with type parameters. This enables you to write more flexible, reusable, and type-safe code by allowing the use of specific types at compile time rather than using raw types (e.g., Object).
+
+Why use Generics? They allow for stronger type checks at compile time, reducing the risk of ClassCastException at runtime.
+Syntax: A type parameter is specified using angle brackets (<>), for example, List<T>.
+Example of a generic class:
+
+java
+Copy code
+public class Box<T> {
+    private T value;
+    
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+6. What are the benefits of using Generics in Java?
+Type Safety: Generics provide compile-time type checking, so you can avoid ClassCastException and other type-related errors.
+Code Reusability: Generics allow you to write more flexible and reusable code without sacrificing type safety. A single class or method can work with different data types.
+Eliminates Type Casting: With generics, you don’t need to cast objects when retrieving them from a collection or container.
+Example:
+
+java
+Copy code
+List<String> list = new ArrayList<>();
+list.add("Hello");
+String str = list.get(0); // No need for casting, the type is already known
+7. What is a Generic Class in Java?
+A Generic Class in Java is a class that can operate on objects of various types while providing compile-time type safety. It uses type parameters (placeholders) to indicate the types of objects it can work with. A generic class can be instantiated with different types when needed.
+
+Example of a generic class:
+
+java
+Copy code
+public class Box<T> {
+    private T item;
+    
+    public void setItem(T item) {
+        this.item = item;
+    }
+    
+    public T getItem() {
+        return item;
+    }
+
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>();
+        intBox.setItem(10);
+        System.out.println(intBox.getItem()); // 10
+        
+        Box<String> strBox = new Box<>();
+        strBox.setItem("Hello");
+        System.out.println(strBox.getItem()); // Hello
+    }
+}
+8. What is a Type Parameter in Java Generics?
+A Type Parameter is a placeholder for the type of data that a class, interface, or method can operate on. It is defined inside angle brackets (<>) and can be replaced with any reference type when the class, interface, or method is instantiated.
+
+Example:
+
+java
+Copy code
+public class Box<T> {
+    private T item;
+
+    public void setItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+}
+Here, T is a type parameter. It will be replaced by an actual type (e.g., String, Integer, etc.) when the Box class is instantiated.
+
+9. What is a Generic Method in Java?
+A Generic Method is a method that can operate on different types of data and is defined with a type parameter. The type parameter is specified before the return type of the method, using angle brackets.
+
+Example:
+
+java
+Copy code
+public class GenericMethodExample {
+    
+    public static <T> void printArray(T[] array) {
+        for (T element : array) {
+            System.out.println(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        Integer[] intArray = {1, 2, 3};
+        String[] strArray = {"Hello", "World"};
+        
+        printArray(intArray); // Prints Integer array
+        printArray(strArray); // Prints String array
+    }
+}
+Here, <T> is the type parameter that makes the method printArray generic. It can work with arrays of any type.
+
+10. What is the difference between ArrayList and ArrayList<T>?
+ArrayList: Refers to the raw type of the ArrayList class, which can hold any type of object (but you lose type safety).
+
+java
+Copy code
+ArrayList list = new ArrayList();
+list.add("String");
+list.add(10);  // No compile-time check
+ArrayList<T>: A generic type where T is a placeholder for the type of elements the ArrayList will store. It provides compile-time type safety, meaning you can only add elements of type T (e.g., String, Integer, etc.).
+
+java
+Copy code
+ArrayList<String> list = new ArrayList<>();
+list.add("String");
+// list.add(10); // Error: incompatible types
+Key Difference: ArrayList<T> enforces type safety at compile time, while ArrayList (raw type) does not provide compile-time type safety.
+
